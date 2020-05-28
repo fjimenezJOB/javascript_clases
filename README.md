@@ -1,2 +1,1 @@
-# Plantilla_Front_2020
-Plantilla para proyectos de FrontEnd = HMLT5 + CSS3 + SASS + JAVASCRIPT
+# Practica de creacion de clases y herencia con JavaScript
