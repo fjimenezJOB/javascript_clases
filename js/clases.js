@@ -13,7 +13,7 @@
 // CLASE PADRE VEHICULO
 class Vehiculo {
   // constructor
-  constructor(anyo, matricula,itvOk, litrosCombustible) {
+  constructor(anyo, matricula, itvOk, litrosCombustible) {
     this.anyo = anyo;
     this.matricula = matricula;
     this.itvOk = itvOk;
@@ -48,34 +48,79 @@ class Vehiculo {
 }
 
 // CLASE HIJA Camión, HEREDA DE VEHICULO
-class Camion extends Vehiculo{
+class Camion extends Vehiculo {
   // constructor
-    constructor(anyo, matricula, itvOk, litrosCombustible,numRuedas, tipo, capacidad, cargaActual, tara) {
-        super(anyo, matricula,itvOk, litrosCombustible);
-        this.numRuedas = numRuedas;
-        this.tipo = tipo;
-        this.cargaActual = cargaActual;
-        this.capacidad = capacidad;
-        this.tara = tara;
-    }
+  constructor(
+    anyo,
+    matricula,
+    itvOk,
+    litrosCombustible,
+    tipo,
+    capacidad,
+    cargaActual,
+    tara
+  ) {
+    super(anyo, matricula, itvOk, litrosCombustible);
+    this.tipo = tipo;
+    this.cargaActual = cargaActual;
+    this.capacidad = capacidad;
+    this.tara = tara;
+  }
 
   // MÉTODOS
-  
-
-}
-
-
-class Autobus extends Vehiculo{
-    // constructor
-    constructor(anyo, matricula,itvOk, litrosCombustible, tipo, aforo, usuarios, maletero = true, pisos = 1){
-        super(anyo, matricula,itvOk, litrosCombustible);
-        this.tipo = tipo;
-        this.aforo = aforo;
-        this.usuarios = usuarios;
-        this.maletero = maletero;
-        this.pisos = pisos;
-
+  comprobarCarga() {
+    // Comprueba si la carga esta completa, si hay exceso de peso o si aun cabe mas peso.
+    if (this.cargaActual == this.capacidad - this.tara){
+      console.log('Camión lleno !!!!');
+    } else if (this.this.cargaActual > this.capacidad - this.tara){
+      console.log('Llevas un exceso de peso!!!')
+    } else if (this.cargaActual < this.capacidad - this.tara){
+      console.log('Carga Correcta, aún caben más bultos');
     }
+  }
 }
 
-var motoPapa = new Camion(2012, "2315LKO", 2, true,30);
+class Autobus extends Vehiculo {
+  // constructor
+  constructor(
+    anyo,
+    matricula,
+    itvOk,
+    litrosCombustible,
+    tipo,
+    aforo,
+    asientosOcupados,
+    usuarios,
+    maletero = true,
+    pisos = 1
+  ) {
+    super(anyo, matricula, itvOk, litrosCombustible);
+    this.tipo = tipo;
+    this.aforo = aforo;
+    this.asientosOcupados = asientosOcupados;
+    this.usuarios = usuarios;
+    this.maletero = maletero;
+    this.pisos = pisos;
+  }
+
+  // MÉTODOS
+  comprobarAforo() {
+    // Compara el aforo actual del bus con el aforo maximo, si esta lleno o si se ha superado
+    switch (true) {
+      case this.asientosOcupados == this.aforo:
+        console.log(`El aforo está completo, no caben mas personas.`);
+        break;
+      case this.asientosOcupados > (this.aforo /3) *2:
+        console.log(`El aforo está proximo a agotarse!!`);
+        break;
+      case this.asientosOcupados > this.aforo:
+        console.log(`ATENCIÓN!!! SE HA SUPERADO EL AFORO!!!`);
+        break;
+      default:
+        console.log(`Aún caben ${this.aforo-this.asientosOcupados} personas`)
+    }
+  }
+}
+
+var bus = new Autobus(2014, "0231HNK", true, 50, "Articulado", 60, 70, "Usuario urbano y discapacitados", false, 1);
+var camion1 = new Camion(2014, "2364KJH", true, 70, "Trailer", 300, 250, 200);
